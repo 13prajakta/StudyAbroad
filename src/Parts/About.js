@@ -6,7 +6,7 @@ function About()
         <>
             <div className="row container-fluid about">
                 <div className="col-md-7">
-                <div class="jumbotron" style={{backgroundImage:"url('student.jpg')",backgroundRepeat:"no-repeat",backgroundSize:"100% 100%" ,height:"500px"}}>
+                <div class="jumbotron" style={{backgroundImage:"url(student.jpg)",backgroundRepeat:"no-repeat",backgroundSize:"100% 100%" ,height:"500px"}}>
                 </div>
                 </div>
                 <div className="col-md-5">
