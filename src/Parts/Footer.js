@@ -1,4 +1,5 @@
 import '../Css/style.scss'
+import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookF, faTwitter, faLinkedin, faDribbble, faGooglePlus } from '@fortawesome/free-brands-svg-icons'
 function Footer() {
@@ -46,16 +47,16 @@ function Footer() {
                             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
                                 <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
                                 <p>
-                                    <a href="#!">Sign Up</a>
+                                <Link to="/signin"> <a href="#!">Sign Up</a></Link>
                                 </p>
                                 <p>
-                                    <a href="#!">About</a>
+                                   <Link to="/"> <a href="#!">Home</a></Link>
                                 </p>
                                 <p>
-                                    <a href="#!">Category</a>
+                                <Link to="/about"> <a href="#!">About</a></Link>
                                 </p>
                                 <p>
-                                    <a href="#!">Help</a>
+                                <Link to="/study"> <a href="#!">Category</a></Link>
                                 </p>
                             </div>
 
