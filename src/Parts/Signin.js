@@ -33,17 +33,21 @@ function Signin(props) {
                 data: user
             }).then((response) => {
                 setMsg(response.data.message);
-                props.history.push("/login")
             }, (error) => {
                 console.log("error from signup api", error)
             })
             
         }
     }
+    function mySignin() {
+        setTimeout(() => { props.history.push("/login") }
+            , 2000);
+    }
     return (
         <>
             <div className="signin">
                 <form className="signform" onSubmit={onSubmit}>
+                    {message=="User already exist."?null: mySignin()}
                 {message=="User already exist." ? <span className="text-danger alert-danger">{message}</span> : <span className="text-success alert-success">{message}</span>}
                 <h2>SIGN IN HERE</h2>
                 <label className="signlabel">
