@@ -3,9 +3,11 @@ import {Link} from 'react-router-dom'
 import {useState} from 'react'
 import { validate } from '../util/validation.js';
 import axios from 'axios';
+import { connect } from "react-redux"
 
 function Signin(props) {
     let [errors, setErrors] = useState({})
+    let [users, setUser] = useState([])
     let [message, setMsg] = useState()
     const onSubmit = (e) => {
         e.preventDefault();
@@ -24,8 +26,10 @@ function Signin(props) {
                 c_password: fields.c_password.value,
                 
             }
-            //console.log("signup",user);
+            //console.log("signup",message);
+            setUser(user)
             setErrors(" ")
+            console.log("signup",users);
             let apiurl ="http://127.0.0.1:8000/api/register"
             axios({
                 url: apiurl,
@@ -33,9 +37,14 @@ function Signin(props) {
                 data: user
             }).then((response) => {
                 setMsg(response.data.message);
+                console.log("from signup api",response.data.data);
+                props.dispatch({
+                    type:"SIGNIN",
+                    payload:response.data
+                })
             }, (error) => {
                 console.log("error from signup api", error)
-            })
+            },[props.signing])
             
         }
     }
@@ -47,8 +56,9 @@ function Signin(props) {
         <>
             <div className="signin">
                 <form className="signform" onSubmit={onSubmit}>
-                    {message=="User already exist."?null: mySignin()}
-                {message=="User already exist." ? <span className="text-danger alert-danger">{message}</span> : <span className="text-success alert-success">{message}</span>}
+                {message=="User already exist Try With diffrent email and number." ? <span className="text-danger alert-danger msg">{message}</span> : <span className="text-success alert-success msg">{message}</span>}
+                {message=="User register successfully ! Thank You for Register with Us.."?mySignin(): null}
+
                 <h2>SIGN IN HERE</h2>
                 <label className="signlabel">
                         <p class="labelTTxt">ENTER YOUR NAME</p>
@@ -97,4 +107,8 @@ function Signin(props) {
         </>
     )
 }
-export default Signin
+export default connect(function (state, prop) {
+    return {
+        signing:state?.signin
+    }
+})(Signin)

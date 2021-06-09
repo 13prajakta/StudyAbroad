@@ -37,7 +37,7 @@ export const validate=(data)=>{
     }
     return error;
 }
-else if(data.name && data.mobile && data.email && data.password && data.cpassword){
+else if(data.name && data.mobile && data.email && data.password && data.c_password){
     if(!data.name.value){
         error.name="*Name is required"
     }
@@ -64,7 +64,7 @@ else if(data.name && data.mobile && data.email && data.password && data.cpasswor
     {
         error.password="*password is required"
     }
-    if(!data.c_password.value)
+     if(!data.c_password.value)
     {
         error.c_password="*Confirm password is required"
     }
@@ -72,6 +72,7 @@ else if(data.name && data.mobile && data.email && data.password && data.cpasswor
     {
         error.c_password="*password and Confirm password not match"
     }
+    
     return error;
 }
 else if(data.email && data.password)

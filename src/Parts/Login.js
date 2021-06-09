@@ -3,11 +3,12 @@ import {Link,withRouter} from 'react-router-dom'
 import {useState,useEffect} from 'react'
 import { validate } from '../util/validation.js';
 import { connect } from "react-redux"
-
+import axios from 'axios';
 
 function Login(props) {
     let [errors, setErrors] = useState({})
     let [users, setUser] = useState({})
+    let [message, setMsg] = useState()
     const onSubmit = (e) => {
         e.preventDefault();
         let fields=e.target.elements
@@ -22,17 +23,28 @@ function Login(props) {
             }
             setUser(user);
             setErrors(" ");
-            props.dispatch({
-                type: "LOGIN",
-                payload: user
-            });
+            axios({
+                url: 'http://127.0.0.1:8000/api/login',
+                method: "post",
+                data:user
+              }).then((response) => {
+                console.log("response from login api", response.data)
+                props.dispatch({
+                  type:"LOGIN",
+                  payload:response.data
+              }) 
+              localStorage.setItem('Mytoken', response.data.token);  
+              setMsg(response.data.message)
+              }, (error) => {
+                console.log("error from detail api", error)
+              })
         }
         
     }
-    // function myLogin() {
-    //     setTimeout(() => { props.history.push("/") }
-    //         , 2000);
-    // }
+    function myLogin() {
+        setTimeout(() => { props.history.push("/") }
+            , 2000);
+    }
     return (
         <>
             <div>
@@ -40,8 +52,8 @@ function Login(props) {
                     <div className="container login">
                         <div className="row">
                             <div className="col-md-4 login-sec">
-                            {/* {props.isloggedin ? myLogin() : null}
-                            {props.user?<span className="text-success">{props.user}</span>:null} */}
+                            {message=="Login Successfully"?<span className="text-success alert-success">{message}</span>:null}
+                            {message=="Login Successfully" ? myLogin() : null}
                                 <h2 className="text-center">Login Now</h2>
                                 <form className="login-form" onSubmit={onSubmit}>
                                     <div className="form-group">

@@ -9,6 +9,13 @@ var study = function (state = {
             state["user"] = action.payload
             return state
         }
+        case "SIGNIN": {
+            console.log("login started")
+            state = { ...state }
+            state["isSignin"] = true
+            state["signin"] = action.payload
+            return state
+        }
         case "LOGOUT": {
             state = { ...state }
             localStorage.clear()

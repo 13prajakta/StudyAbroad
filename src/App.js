@@ -16,14 +16,16 @@ import { connect } from "react-redux"
 import axios from 'axios';
 
 function App(props) {
-  var token = localStorage.token
-  console.log("mean user is already logged in",token)
-  if (!localStorage.token) {
-    var token = localStorage.token
-    console.log("mean user is already logged in",token)
+  var token = localStorage.getItem('Mytoken');
+  //console.log("mean user is already logged in",token)
+  if (token && props.user) {
+    console.log("ok")
     axios({
-      url: 'http://127.0.0.1:8000/api/login',
+      url: 'http://127.0.0.1:8000/api/checkdetails',
       method: "get",
+       headers:{
+        authtoken:token
+      } 
     }).then((response) => {
       console.log("response from details api", response.data)
       props.dispatch({
@@ -57,7 +59,7 @@ function App(props) {
 }
 
 export default connect(function (state, props) {
-  //console.log("app js file state", state)
+  console.log("app js file state", state)
   return {
     loginstatus: state?.isloggedin,
     user: state?.user
