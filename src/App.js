@@ -12,8 +12,29 @@ import Scholership from './Parts/Scholership.js'
 import Process from './Parts/Process.js'
 import College from './Parts/College.js'
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { connect } from "react-redux"
+import axios from 'axios';
 
-function App() {
+function App(props) {
+  var token = localStorage.token
+  console.log("mean user is already logged in",token)
+  if (!localStorage.token) {
+    var token = localStorage.token
+    console.log("mean user is already logged in",token)
+    axios({
+      url: 'http://127.0.0.1:8000/api/login',
+      method: "get",
+    }).then((response) => {
+      console.log("response from details api", response.data)
+      props.dispatch({
+        type:"CHECK_USER",
+        payload:response.data
+    })   
+    }, (error) => {
+      console.log("error from detail api", error)
+    })
+  }
+
   return (
     <div className="App">
       <Router>
@@ -35,4 +56,11 @@ function App() {
   );
 }
 
-export default App;
+export default connect(function (state, props) {
+  //console.log("app js file state", state)
+  return {
+    loginstatus: state?.isloggedin,
+    user: state?.user
+  }
+})(App)
+

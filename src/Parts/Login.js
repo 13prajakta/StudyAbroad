@@ -1,64 +1,98 @@
 import '../Css/login.scss';
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
+import {useState,useEffect} from 'react'
+import { validate } from '../util/validation.js';
+import { connect } from "react-redux"
 
-function Login() {
+
+function Login(props) {
+    let [errors, setErrors] = useState({})
+    let [users, setUser] = useState({})
+    const onSubmit = (e) => {
+        e.preventDefault();
+        let fields=e.target.elements
+        let error =validate(fields)
+        if(Object.keys(error).length>0){
+            setErrors(error)
+        } 
+       else { 
+            var user = {
+                email: fields.email.value,
+                password: fields.password.value
+            }
+            setUser(user);
+            setErrors(" ");
+            props.dispatch({
+                type: "LOGIN",
+                payload: user
+            });
+        }
+        
+    }
+    // function myLogin() {
+    //     setTimeout(() => { props.history.push("/") }
+    //         , 2000);
+    // }
     return (
         <>
             <div>
-                <section class="login-block">
-                    <div class="container login">
-                        <div class="row">
-                            <div class="col-md-4 login-sec">
-                                <h2 class="text-center">Login Now</h2>
-                                <form class="login-form">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="text-uppercase">Username</label>
-                                        <input type="text" class="form-control" placeholder="" />
-
+                <section className="login-block">
+                    <div className="container login">
+                        <div className="row">
+                            <div className="col-md-4 login-sec">
+                            {/* {props.isloggedin ? myLogin() : null}
+                            {props.user?<span className="text-success">{props.user}</span>:null} */}
+                                <h2 className="text-center">Login Now</h2>
+                                <form className="login-form" onSubmit={onSubmit}>
+                                    <div className="form-group">
+                                        <label className="text-uppercase">Username</label>
+                                        <input type="text" name="email" className="form-control" placeholder="" />
+                                        {errors.email ? <span className="text-danger">{errors.email}</span> : null}
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-                                        <input type="password" class="form-control" placeholder="" />
+                                    <div className="form-group">
+                                        <label className="text-uppercase">Password</label>
+                                        <input type="password" name="password" className="form-control" placeholder="" />
+                                        {errors.password ? <span className="text-danger">{errors.password}</span> : null}
                                     </div>
 
 
-                                    <div class="form-check">
-                                    <Link to="/signin"> <button type="button" class="btn btn-signup float-left">Register</button></Link>
-                                        <button type="submit" class="btn btn-login float-right">Login</button>
+                                    <div className="form-check">
+                                    <Link to="/signin"> <button type="button" className="btn btn-signup float-left">Register</button></Link>
+                                        <button type="submit" className="btn btn-login float-right">Login</button>
                                     </div>
 
                                 </form>
                             </div>
-                            <div class="col-md-8 banner-sec">
-                                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <div className="col-md-8 banner-sec">
+                                <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+                                    <ol className="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                     </ol>
-                                    <div class="carousel-inner" role="listbox">
-                                        <div class="carousel-item active">
-                                            <img class="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide" />
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <div class="banner-text">
+                                    <div className="carousel-inner" role="listbox">
+                                        <div className="carousel-item active">
+                                            <img className="d-block img-fluid" src="https://static.pexels.com/photos/33972/pexels-photo.jpg" alt="First slide" />
+                                            <div className="carousel-caption d-none d-md-block">
+                                                <div className="banner-text">
                                                     <h2>This is Heaven</h2>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" alt="First slide" />
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <div class="banner-text">
+                                        <div className="carousel-item">
+                                            <img className="d-block img-fluid" src="https://images.pexels.com/photos/7097/people-coffee-tea-meeting.jpg" alt="First slide" />
+                                            <div className="carousel-caption d-none d-md-block">
+                                                <div className="banner-text">
                                                     <h2>This is Heaven</h2>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg" alt="First slide" />
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <div class="banner-text">
+                                        <div className="carousel-item">
+                                            <img className="d-block img-fluid" src="https://images.pexels.com/photos/872957/pexels-photo-872957.jpeg" alt="First slide" />
+                                            <div className="carousel-caption d-none d-md-block">
+                                                <div className="banner-text">
                                                     <h2>This is Heaven</h2>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
                                                 </div>
@@ -74,4 +108,11 @@ function Login() {
         </>
     )
 }
-export default Login
+Login = withRouter(Login)
+export default connect(function (state, prop) {
+    console.log(state,"users login")
+    return {
+        isloggedin: state?.isloggedin,
+        //users: state?.user
+    }
+})(Login)

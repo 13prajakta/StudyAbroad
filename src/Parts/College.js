@@ -1,6 +1,27 @@
 import '../Css/style.scss'
-function College()
+import {useEffect,useState} from 'react'
+import axios from 'axios';
+import { connect } from "react-redux"
+function College(props)
 {
+    useEffect(() => {
+        
+        let apiurl ="http://127.0.0.1:8000/api/universities"
+            axios({
+                url: apiurl,
+                method:"get",
+            }).then((response) => {
+                console.log("response from university api",response.data)
+                props.dispatch({
+                    type: "UNIVERSITY",
+                    payload: response.data.data
+                })
+            }, (error) => {
+                console.log("error from signup api", error)
+            })
+    }, [props.isUni]);
+    
+    console.log("universities",props.university)
     return(
         <>
            <div className="container coll">
@@ -13,42 +34,25 @@ function College()
                     </tr>
                 </thead>
                 <tbody>
+                {props.university?.length > 0 && props.university.map((each, index) => {
+                    return(
                     <tr>
-                    <th scope="row">1</th>
-                    <td>University of Toronto.</td>
+                    <th scope="row">{each.id}</th>
+                    <td>{each.university}</td>
                     </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>University of British Columbia.</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td>McGill University.</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">4</th>
-                    <td>McMaster University.</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">5</th>
-                    <td>University of Alberta.</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">6</th>
-                    <td>University of Montreal.</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">7</th>
-                    <td>University of Calgary.</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">8</th>
-                    <td>University of Ottawa.</td>
-                    </tr>
+                    )
+                     })
+                    }
                 </tbody>
                 </table>
            </div>
         </>
     )
 }
-export default College
+export default connect(function (state, prop) {
+    return {
+        isloggedin: state?.isloggedin,
+        university:state?.university,
+        isUni:state?.isUni
+    }
+})(College)

@@ -1,6 +1,14 @@
 import '../Css/style.scss'
 import { Link } from 'react-router-dom'
-function Navbar() {
+import { connect } from "react-redux"
+function Navbar(props) {
+  let logout = function (event) {
+    event.preventDefault()
+    props.dispatch({
+        type: "LOGOUT"
+    })
+
+}
   return (
     <>
       <nav class="navbar">
@@ -33,7 +41,9 @@ function Navbar() {
                 </div>
               </li>
               <li><Link to="/contact"><a href="#">Contact</a></Link></li>
-              <li><Link to="/login">Login</Link></li> 
+              {props.isloggedin?<li><a href="#" onClick={logout}>Logout</a></li> 
+              :
+              <li><Link to="/login">Login</Link></li> }
             </ul>
           </div>
         </div>
@@ -41,4 +51,9 @@ function Navbar() {
     </>
   )
 }
-export default Navbar
+export default connect(function (state, prop) {
+  console.log("login status",state)
+  return {
+      isloggedin: state?.isloggedin,
+  }
+})(Navbar)
