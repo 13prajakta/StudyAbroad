@@ -23,7 +23,8 @@ function Navbar(props) {
             <Link to="/"><a href="#">
               <h4>STUDY<span>Abroad</span></h4>
             </a></Link> &nbsp;&nbsp;&nbsp;
-            <a>{props.user?<strong className="text-warning"> Welcome!  {props.user}</strong> :null}</a>
+            <a>{props.isloggedin && props.user?<strong style={{color:"#ffb981"}}> Welcome!  {props.user}</strong> :null}</a>
+            <a>{props.isloggedin && props.check?<strong style={{color:"#ffb981"}}> Welcome!  {props.check}</strong> :null}</a>
           </div>
 
           <div class="navbar-menu" id="open-navbar1">
@@ -53,9 +54,10 @@ function Navbar(props) {
   )
 }
 export default connect(function (state, prop) {
-  //.log("login status",state)
+  console.log("login status",state)
   return {
       isloggedin: state?.isloggedin,
-      user:state?.user?.user?.name
+      check:state?.user?.user?.name,
+      user:state?.user?.name
   }
 })(Navbar)

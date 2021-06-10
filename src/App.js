@@ -35,7 +35,7 @@ function App(props) {
     })   
     }, (error) => {
       console.log("error from detail api", error)
-    },[props.user])
+    })
   }
 
   return (
@@ -60,10 +60,11 @@ function App(props) {
 }
 
 export default connect(function (state, props) {
-  //console.log("app js file state", state)
+  console.log("app js file state", state)
   return {
     loginstatus: state?.isloggedin,
-    user: state?.user
+    user: state?.user,
+    islog:state?.islog
   }
 })(App)
 

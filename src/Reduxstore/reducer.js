@@ -6,6 +6,7 @@ var study = function (state = {
             //console.log("login started")
             state = { ...state }
             state["isloggedin"] = true
+            state["islog"] = true
             state["user"] = action.payload
             return state
         }
