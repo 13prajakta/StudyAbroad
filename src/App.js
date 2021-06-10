@@ -17,14 +17,15 @@ import axios from 'axios';
 
 function App(props) {
   var token = localStorage.getItem('Mytoken');
+ 
   //console.log("mean user is already logged in",token)
-  if (token && props.user) {
-    console.log("ok")
+  if (token && !props.user) {
+    // console.log("ok")
     axios({
       url: 'http://127.0.0.1:8000/api/checkdetails',
       method: "get",
        headers:{
-        authtoken:token
+        Authorization:token
       } 
     }).then((response) => {
       console.log("response from details api", response.data)
@@ -34,7 +35,7 @@ function App(props) {
     })   
     }, (error) => {
       console.log("error from detail api", error)
-    })
+    },[props.user])
   }
 
   return (

@@ -22,7 +22,8 @@ function Navbar(props) {
             </button>
             <Link to="/"><a href="#">
               <h4>STUDY<span>Abroad</span></h4>
-            </a></Link>
+            </a></Link> &nbsp;&nbsp;&nbsp;
+            <a><strong className="text-warning">Welcome!</strong> {props.user}</a>
           </div>
 
           <div class="navbar-menu" id="open-navbar1">
@@ -55,5 +56,6 @@ export default connect(function (state, prop) {
   console.log("login status",state)
   return {
       isloggedin: state?.isloggedin,
+      user:state?.user?.user?.name
   }
 })(Navbar)
