@@ -244,21 +244,21 @@ a {
 }
 
 .detail-menue{
-  padding: 3px 0px 0px 0px;
-  background-color: #c7c5c5;
+  padding: 20px 0px 0px 0px;
+  background-color: #0c0823;
 }
 .nav-pills 
 {
   .nav-link{
-    color: #948125 !important;
+    color: #4ee500 !important;
     margin-left: 30px;
     font-size: $font-size-detail;
     font-weight: 500;
   }.active{
-  border-bottom: 4px solid #d30000 !important;
+  border: 2px solid #4ee500 !important;
   background-color: transparent !important;
-  color: #250069 !important;
-  font-weight: bold;
+  color: #fff !important;
+  // font-weight: bold;
 
   }
 }
