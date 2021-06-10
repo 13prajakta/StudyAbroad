@@ -3,14 +3,14 @@ var study = function (state = {
 }, action) {
     switch (action.type) {
         case "LOGIN": {
-            console.log("login started")
+            //console.log("login started")
             state = { ...state }
             state["isloggedin"] = true
             state["user"] = action.payload
             return state
         }
         case "SIGNIN": {
-            console.log("login started")
+            //console.log("login started")
             state = { ...state }
             state["isSignin"] = true
             state["signin"] = action.payload

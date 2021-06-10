@@ -10,7 +10,7 @@ function Scholership(props) {
                 url: apiurl,
                 method:"get",
             }).then((response) => {
-                console.log("response from scholership api",response.data)
+                //console.log("response from scholership api",response.data)
                 props.dispatch({
                     type: "SCHOLERSHIP",
                     payload: response.data.data

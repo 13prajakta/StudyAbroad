@@ -28,7 +28,7 @@ function App(props) {
         Authorization:token
       } 
     }).then((response) => {
-      console.log("response from details api", response.data)
+      //console.log("response from details api", response.data)
       props.dispatch({
         type:"CHECK_USER",
         payload:response.data
@@ -60,7 +60,7 @@ function App(props) {
 }
 
 export default connect(function (state, props) {
-  console.log("app js file state", state)
+  //console.log("app js file state", state)
   return {
     loginstatus: state?.isloggedin,
     user: state?.user

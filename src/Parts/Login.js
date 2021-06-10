@@ -28,7 +28,7 @@ function Login(props) {
                 method: "post",
                 data:user
               }).then((response) => {
-                console.log("response from login api", response.data)
+                //console.log("response from login api", response.data)
                 props.dispatch({
                   type:"LOGIN",
                   payload:response.data
@@ -122,7 +122,7 @@ function Login(props) {
 }
 Login = withRouter(Login)
 export default connect(function (state, prop) {
-    console.log(state,"users login")
+    //console.log(state,"users login")
     return {
         isloggedin: state?.isloggedin,
         //users: state?.user

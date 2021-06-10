@@ -11,7 +11,7 @@ function College(props)
                 url: apiurl,
                 method:"get",
             }).then((response) => {
-                console.log("response from university api",response.data)
+                //.log("response from university api",response.data)
                 props.dispatch({
                     type: "UNIVERSITY",
                     payload: response.data.data
@@ -21,7 +21,7 @@ function College(props)
             })
     }, [props.isUni]);
     
-    console.log("universities",props.university)
+    //console.log("universities",props.university)
     return(
         <>
            <div className="container coll">

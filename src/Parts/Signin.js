@@ -29,7 +29,7 @@ function Signin(props) {
             //console.log("signup",message);
             setUser(user)
             setErrors(" ")
-            console.log("signup",users);
+            //console.log("signup",users);
             let apiurl ="http://127.0.0.1:8000/api/register"
             axios({
                 url: apiurl,
@@ -37,7 +37,7 @@ function Signin(props) {
                 data: user
             }).then((response) => {
                 setMsg(response.data.message);
-                console.log("from signup api",response.data.data);
+                //console.log("from signup api",response.data.data);
                 props.dispatch({
                     type:"SIGNIN",
                     payload:response.data
