@@ -25,7 +25,7 @@ function Contact() {
             }
             setUser(user)
             setErrors(" ")
-            let apiurl ="http://127.0.0.1:8000/api/getintouch"
+            let apiurl =process.env.REACT_APP_BASE_URL +"api/getintouch"
             axios({
                 url: apiurl,
                 method:"POST",

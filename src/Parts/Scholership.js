@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 function Scholership(props) {
     useEffect(() => {
         
-        let apiurl ="http://127.0.0.1:8000/api/scholershiplist"
+        let apiurl =process.env.REACT_APP_BASE_URL +"api/scholershiplist"
             axios({
                 url: apiurl,
                 method:"get",

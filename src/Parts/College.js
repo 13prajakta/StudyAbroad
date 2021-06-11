@@ -6,7 +6,7 @@ function College(props)
 {
     useEffect(() => {
         
-        let apiurl ="http://127.0.0.1:8000/api/universities"
+        let apiurl =process.env.REACT_APP_BASE_URL +"api/universities"
             axios({
                 url: apiurl,
                 method:"get",

@@ -22,7 +22,7 @@ function App(props) {
   if (token && !props.user) {
     // console.log("ok")
     axios({
-      url: 'http://127.0.0.1:8000/api/checkdetails',
+      url: process.env.REACT_APP_BASE_URL +'api/checkdetails',
       method: "get",
        headers:{
         Authorization:token
