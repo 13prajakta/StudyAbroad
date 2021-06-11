@@ -30,7 +30,7 @@ function Signin(props) {
             setUser(user)
             setErrors(" ")
             //console.log("signup",users);
-            let apiurl =process.env.REACT_APP_BASE_URL +"api/register"
+            let apiurl ="http://127.0.0.1:8000/api/register"
             axios({
                 url: apiurl,
                 method:"POST",
